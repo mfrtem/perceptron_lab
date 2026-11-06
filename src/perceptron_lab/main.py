@@ -1,3 +1,5 @@
+import argparse
+
 import matplotlib.pyplot as plt
 import numpy as np
 import numpy.typing as npt
@@ -38,10 +40,30 @@ def plot_errors(errors: list[int]) -> None:
     plt.show()
 
 
-def main() -> None:
-    X, y = generate_data()
+def parse_args() -> argparse.Namespace:
+    """Parse command-line arguments."""
 
-    model = Perceptron(n_features=2)
+    parser = argparse.ArgumentParser(description="Train a perceptron classifier.")
+
+    parser.add_argument("--samples", type=int, default=100, help="Number of samples")
+    parser.add_argument("--lr", type=float, default=0.01, help="Learning rate")
+    parser.add_argument(
+        "--epochs", type=int, default=50, help="Number of training epochs"
+    )
+
+    return parser.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+
+    X, y = generate_data(samples=args.samples)
+
+    model = Perceptron(
+        n_features=2,
+        learning_rate=args.lr,
+        epochs=args.epochs,
+    )
     model.train(X, y)
 
     accuracy = model.score(X, y)
