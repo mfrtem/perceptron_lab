@@ -19,6 +19,8 @@
 - Matplotlib
 - Scikit-learn
 - Pytest
+- Mypy
+- Ruff
 
 ## Установка
 
@@ -74,6 +76,26 @@ uv run pytest -v
 - Расчёт точности методом `score()`.
 - Генерацию искусственных данных.
 - Загрузку и подготовку данных Iris.
+
+## Mypy и Ruff
+
+Для проверки типов используется Mypy в строгом режиме:
+
+```bash
+uv run mypy --strict src
+```
+
+Для проверки стиля кода используется Ruff:
+
+```bash
+uv run ruff check .
+```
+
+Для проверки форматирования:
+
+```bash
+uv run ruff format --check .
+```
 
 ## Структура проекта
 

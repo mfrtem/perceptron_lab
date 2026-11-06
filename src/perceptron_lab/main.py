@@ -1,10 +1,14 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import numpy.typing as npt
 
-from perceptron_lab.model import Perceptron
 from perceptron_lab.data import generate_data, load_iris_data
+from perceptron_lab.model import Perceptron
 
-def plot_decision_boundary(X, y, model):
+
+def plot_decision_boundary(
+    X: npt.NDArray[np.float64], y: npt.NDArray[np.int64], model: Perceptron
+) -> None:
     x_min = X[:, 0].min() - 1
     x_max = X[:, 0].max() + 1
     y_min = X[:, 1].min() - 1
@@ -24,7 +28,8 @@ def plot_decision_boundary(X, y, model):
     plt.ylabel("Признак 2")
     plt.show()
 
-def plot_errors(errors):
+
+def plot_errors(errors: list[int]) -> None:
     plt.plot(range(1, len(errors) + 1), errors, marker="o")
 
     plt.title("Ошибки при обучении")
@@ -32,7 +37,8 @@ def plot_errors(errors):
     plt.ylabel("Кол-во ошибок")
     plt.show()
 
-def main():
+
+def main() -> None:
     X, y = generate_data()
 
     model = Perceptron(n_features=2)
@@ -51,6 +57,7 @@ def main():
 
     iris_accuracy = iris_model.score(X_iris, y_iris)
     print(f"Точность (iris): {iris_accuracy:.2%}")
+
 
 if __name__ == "__main__":
     main()
